@@ -1,4 +1,4 @@
-package exceptions;
+package Homework.homework1.exceptions;
 
 public class InvalidTransactionException extends Exception {
 

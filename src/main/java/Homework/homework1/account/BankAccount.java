@@ -1,4 +1,4 @@
-package account;
+package Homework.homework1.account;
 
 public class BankAccount {
 
