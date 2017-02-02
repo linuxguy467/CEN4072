@@ -1,21 +1,18 @@
-/**
- * 
- */
 package Homework.homework1.test;
+/**
+ * @author 0031
+ * Assignment #1
+ * CEN 4072
+ */
 
-import static org.junit.Assert.*;
-
+import Homework.homework1.account.BankAccount;
+import Homework.homework1.exceptions.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import Homework.homework1.account.BankAccount;
-import Homework.homework1.exceptions.*;
+import static org.junit.Assert.*;
 
-/**
- * @author 0031
- *
- */
 public class BankAccountTest {
 
 	private BankAccount firstbankaccount;
@@ -29,7 +26,7 @@ public class BankAccountTest {
 	 * a user defined amount of $800.00, the premium
 	 * account minimum.
 	 * 
-	 * @throws java.lang.Exception
+	 * @throws Exception -- May be thrown if set up fails
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -40,8 +37,8 @@ public class BankAccountTest {
 	/**
 	 * Tears down the bank account objects after the
 	 * test cases have concluded.
-	 * 
-	 * @throws java.lang.Exception
+	 *
+	 * @throws Exception -- May be thrown if tear down fails
 	 */
 	@After
 	public void tearDown() throws Exception {
@@ -50,7 +47,10 @@ public class BankAccountTest {
 	}
 
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#BankAccount()}.
+	 * Test method for {@link BankAccount#BankAccount()}.
+	 * Asserts the first bank account has $75 required minimum balance.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
 	 */
 	@Test
 	public void testBankAccount() {
@@ -58,7 +58,10 @@ public class BankAccountTest {
 	}
 
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#BankAccount(double)}.
+	 * Test method for {@link BankAccount#BankAccount(double)}.
+	 * Asserts the first bank account has $800 premium account balance.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
 	 */
 	@Test
 	public void testBankAccountDouble() {
@@ -66,8 +69,12 @@ public class BankAccountTest {
 	}
 
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#deposit(double)}.
-	 * @throws Exception 
+	 * Test method for {@link BankAccount#deposit(double)}.
+	 * Deposit $100.00 into the first bank account. Then assert
+	 * that the first bank account will have $175.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test
 	public void testDeposit() throws Exception {
@@ -76,17 +83,27 @@ public class BankAccountTest {
 	}
 
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#deposit(double)}.
-	 * @throws Exception 
+	 * Test method for {@link BankAccount#deposit(double)}.
+	 * Tests the deposit method for an invalid transaction exception by
+	 * depositing -$100 into the first bank account and
+	 * $0 into the second bank account.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- handles thrown exception
 	 */
 	@Test(expected=InvalidTransactionException.class)
 	public void testDepositWithITE() throws Exception {
+		secondbankaccount.deposit(0.00);
 		firstbankaccount.deposit(-100.00);
 	}
 	
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#withdraw(double)}.
-	 * @throws Exception 
+	 * Test method for {@link BankAccount#withdraw(double)}.
+	 * Withdraws $100 from the second bank account.
+	 * Then asserts the second bank account has $700.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test
 	public void testWithdraw() throws Exception {
@@ -95,8 +112,13 @@ public class BankAccountTest {
 	}
 	
 	/**
-	 * 
-	 * @throws Exception
+	 * Test method for {@link BankAccount#withdraw(double)}.
+	 * Tests the withdraw function to see if an expected
+	 * InsufficientFundsException will be thrown
+	 * by withdrawing $100 from the first bank account.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test(expected=InsufficientFundsException.class)
 	public void testWithdrawWithIFE() throws Exception{
@@ -104,16 +126,26 @@ public class BankAccountTest {
 	}
 	
 	/**
-	 * 
-	 * @throws Exception
+	 * Test method for {@link BankAccount#withdraw(double)}.
+	 * Withdraws $0 from the second bank account and -$25 from
+	 * the first bank account which will trigger the expected
+	 * InvalidTransactionException.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test(expected=InvalidTransactionException.class)
 	public void testWithdrawWithITE() throws Exception{
+		secondbankaccount.withdraw(0.00);
 		firstbankaccount.withdraw(-25.00);
 	}
 	
 	/**
-	 * Tests method withdraw to throw the AccountOverdrawnException
+	 * Test method for {@link BankAccount#withdraw(double)}.
+	 * Withdraws $25 from first bank account
+	 * to throw the expected AccountOverdrawnException.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
 	 * @throws Exception - Handles thrown exceptions
 	 */
 	@Test(expected=AccountOverdrawnException.class)
@@ -122,7 +154,12 @@ public class BankAccountTest {
 	}
 
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#transfer(double, Homework.homework1.account.BankAccount)}.
+	 * Test method for {@link BankAccount#transfer(double, BankAccount)}.
+	 * Transfers $100.00 from the second bank account to the first bank account
+	 * Then asserts the first bank account has $175.00 and the second bank
+	 * account has $700.00.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
 	 * @throws Exception 
 	 */
 	@Test
@@ -133,8 +170,13 @@ public class BankAccountTest {
 	}
 
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#transfer(double, Homework.homework1.account.BankAccount)}.
-	 * @throws Exception 
+	 * Test method for {@link BankAccount#transfer(double, BankAccount)}.
+	 * Attempts to transfer $750.00 from the second bank account to the
+	 * first bank account which will result in the asserted
+	 * AccountOverdrawnException being thrown.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test(expected=AccountOverdrawnException.class)
 	public void testTransferWithAOE() throws Exception {
@@ -142,17 +184,29 @@ public class BankAccountTest {
 	}
 	
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#transfer(double, Homework.homework1.account.BankAccount)}.
-	 * @throws Exception 
+	 * Test method for {@link BankAccount#transfer(double, BankAccount)}.
+	 * Attempts to transfer $0 from the first bank account to the
+	 * second bank account and transfer -$50 from the second bank account to
+	 * the first bank account. This will result in the asserted
+	 * InvalidTransactionException being thrown.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test(expected=InvalidTransactionException.class)
 	public void testTransferWithITE() throws Exception {
+		firstbankaccount.transfer(0, secondbankaccount);
 		secondbankaccount.transfer(-50.00, firstbankaccount);
 	}
 	
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#transfer(double, Homework.homework1.account.BankAccount)}.
-	 * @throws Exception 
+	 * Test method for {@link BankAccount#transfer(double, BankAccount)}.
+	 * Attempts to transfer $850.00 from the second bank account to
+	 * the first bank account. This will result in the asserted
+	 * InsufficientFundsException being thrown.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
+	 * @throws Exception -- exception handler
 	 */
 	@Test(expected=InsufficientFundsException.class)
 	public void testTransferWithIFE() throws Exception {
@@ -160,15 +214,24 @@ public class BankAccountTest {
 	}
 	
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#isPremiumAccount()}.
+	 * Test method for {@link BankAccount#isPremiumAccount()}.
+	 * Tests if the first bank account is not a premium account
+	 * and the second bank account is a premium account.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
 	 */
 	@Test
 	public void testIsPremiumAccount() {
 		assertTrue(secondbankaccount.isPremiumAccount());
+		assertFalse(firstbankaccount.isPremiumAccount());
 	}
-
+	
 	/**
-	 * Test method for {@link Homework.homework1.account.BankAccount#getBalance()}.
+	 * Test method for {@link BankAccount#getBalance()}.
+	 * Asserts the first bank account has the minimum required
+	 * balance of $75.00.
+	 * AssertionException is thrown if fails.
+	 * Test run successfully passed.
 	 */
 	@Test
 	public void testGetBalance() {
