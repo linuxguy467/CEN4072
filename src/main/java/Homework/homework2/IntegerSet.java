@@ -1,11 +1,5 @@
 package Homework.homework2;
-//============================================================================
-// Author		: SE Department
-// Date			: 1/26/2017
-// Assignment	: HomeWork #2
-// Class		: CEN 4072
-// University	: Florida Gulf Coast University
-//============================================================================
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +8,13 @@ import java.util.List;
 
 import static java.lang.Integer.valueOf;
 
+/**
+ *  Author		: SE Department
+ *  Date		: 1/26/2017
+ *  Assignment	: HomeWork #2
+ *  Class		: CEN 4072
+ *  University	: Florida Gulf Coast University
+ */
 public class IntegerSet {
 
     /**
