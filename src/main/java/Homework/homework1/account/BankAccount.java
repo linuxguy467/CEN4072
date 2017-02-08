@@ -35,43 +35,60 @@ public class BankAccount {
 	 */
 	public void deposit (double amount) 
 			throws InvalidTransactionException{
-		if(amount < 0){
+		if(amount <= 0){
 			throw new InvalidTransactionException();
 		}
 		double newBalance = balance + amount;
 		balance = newBalance;
 	}
-	
-	// Withdraws money from the bank account
+
+	/**
+	 * Withdraws money from the bank account
+	 * @param amount -- the amount to withdraw
+	 * @throws InvalidTransactionException -- thrown if the amount is less than or equal to zero.
+	 * @throws InsufficientFundsException -- if the (balance - amount) is less than 0.
+	 * @throws AccountOverdrawnException -- if the (balance - amount is less than the required minimum
+	 */
 	public void withdraw (double amount) 
 			throws InvalidTransactionException, 
 			InsufficientFundsException, AccountOverdrawnException{
-		if(amount < 0){
+		if(amount <= 0){
 			throw new InvalidTransactionException();
 		}
 		if((balance - amount) < 0){
 			throw new InsufficientFundsException();
 		}
-		if((balance - amount) < 75.0){
+		if((balance - amount) < requiredMinimum){
 			throw new AccountOverdrawnException();
 		}
 		double newBalance = balance - amount;
 		balance = newBalance;
 	}
-	
-	// Transfers money
+
+	/**
+	 * Transfers money from one bank account to another.
+	 * @param amount - the amount to transfer
+	 * @param toAccount - the bank account to transfer the amount.
+	 * @throws Exception - exception handler.
+	 */
 	public void transfer(double amount, BankAccount toAccount) 
 			throws Exception{
 		this.withdraw(amount);
 		toAccount.deposit(amount);
 	}
-	
-    // Determines whether or not an account has premium status
+
+	/**
+	 * Determines whether or not an account has premium status.
+	 * @return true if account is premium account, false otherwise
+	 */
 	public boolean isPremiumAccount() {
 		return (balance >= BankAccount.premiumAmount);
 	}
-	
-	// Gets the current balance of the bank account
+
+	/**
+	 * Gets the current balance of the bank account.
+	 * @return the balance of the account.
+	 */
 	public double getBalance () {
 		return balance;
 	}	
